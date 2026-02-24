@@ -1,12 +1,13 @@
 # Kaidyn's Profile Website
 
-This is my personal profile webwsite built using html
+This is my personal profile multi-page website built using html and styled with an external css stylesheet
 
 ## Features
-- About me section
-- Skills section
-- Projects section
-- Contact me section
+- Home page
+- About page
+- Projects page
+- Contact page
 
-<img width="1189" height="678" alt="Screenshot 2026-02-20 at 11 19 22 AM" src="https://github.com/user-attachments/assets/dd45774c-8fbf-4c7d-9c5c-d7557d0f9b99" />
+<img width="1106" height="620" alt="Screenshot 2026-02-24 at 2 37 43 PM" src="https://github.com/user-attachments/assets/f9d62f47-a15b-4ea4-8ca9-3ae0a907cb6a" />
+
 
