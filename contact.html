@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaidyn's Multi-Page Website - Contact</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="container">
+        <h1>Contact Me</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container stack">
+        <section>
+
+            <h2>Get in Touch</h2>
+
+            <p>If you would like to get in touch with me, please feel free to reach out via email at <a href="mailto:kcalame@lakelandcollege.edu">kcalame@lakelandcollege.edu</a></p>
+
+        </section>
+        <form action="#" method="post">
+
+        <!-- Name -->
+        <label for="name">Name:</label>
+        <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required 
+            minlength="2"
+            placeholder="Enter your name">
+
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            required
+            placeholder="Enter your email">
+
+        <!-- Topic -->
+        <label for="topic">Topic:</label>
+        <select id="topic" name="topic" required>
+            <option value="">--Select a topic--</option>
+            <option value="support">Support</option>
+            <option value="sales">Questions</option>
+            <option value="feedback">Feedback</option>
+        </select>
+
+        <!-- Preferred Contact Method -->
+        <fieldset>
+            <legend>Preferred Contact Method:</legend>
+
+            <input type="radio" id="contact-email" name="preferred_contact" value="email" required>
+            <label for="contact-email">Email</label>
+
+            <input type="radio" id="contact-phone" name="preferred_contact" value="phone">
+            <label for="contact-phone">Phone</label>
+
+            <input type="radio" id="contact-text" name="preferred_contact" value="text">
+            <label for="contact-text">Text Message</label>
+        </fieldset>
+
+        <!-- Message -->
+        <label for="message">Message:</label>
+        <textarea 
+            id="message" 
+            name="message" 
+            required 
+            minlength="10"
+            rows="5"
+            placeholder="Enter your message (at least 10 characters)"></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn">Submit</button>
+
+
+        </form>
+    </main>
+    <footer class="container">
+        <p class="muted">&copy; 2026 Kaidyn Calame | kcalame@lakelandcollege.edu</p>
+    </footer>
+    
+</body>
+</html>
