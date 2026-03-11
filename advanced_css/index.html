@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+
+<style>
+
+:root {
+  --bg: #ffffff;
+  --text: #222;
+  --primary: #4f46e5;
+  --card: #f4f4f4;
+}
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --text: #eaeaea;
+  --primary: #818cf8;
+  --card: #1e1e1e;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: system-ui, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+.container{
+  width:90%;
+  max-width:1100px;
+  margin:auto;
+}
+
+:focus{
+  outline:3px solid var(--primary);
+  outline-offset:3px;
+}
+
+nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 0;
+}
+
+.logo{
+  font-weight:bold;
+}
+
+.nav-links{
+  display:flex;
+  gap:1.5rem;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--text);
+}
+
+.btn{
+  padding:.6rem 1rem;
+  background:var(--primary);
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition:transform .2s ease, opacity .2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  opacity:.9;
+}
+
+.hero{
+  padding:4rem 0;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+
+.fade-in{
+  animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.projects{
+  padding:3rem 0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+}
+
+.card{
+  background:var(--card);
+  padding:1.5rem;
+  border-radius:10px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
+
+footer{
+  text-align:center;
+  padding:2rem 0;
+  font-size:.9rem;
+}
+
+@media (min-width:600px){
+
+  .hero{
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+  }
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media (min-width:900px){
+
+  .grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<nav>
+<div class="logo">MyPortfolio</div>
+
+<div class="nav-links">
+<a href="#">Home</a>
+<a href="#">Projects</a>
+<a href="#">Contact</a>
+<button class="btn" id="themeToggle">Dark Mode</button>
+</div>
+</nav>
+
+<section class="hero fade-in">
+
+<div>
+<h1>Kaidyn Calame</h1>
+<p>My name is Kaidyn and I am learning how to code.</p>
+<button class="btn">View Work</button>
+</div>
+
+</section>
+
+<section class="projects">
+
+<h2>Projects</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Project One</h3>
+<p>Responsive landing page built with CSS Grid.</p>
+</div>
+
+<div class="card">
+<h3>Project Two</h3>
+<p>Interactive web app using JavaScript.</p>
+</div>
+
+<div class="card">
+<h3>Project Three</h3>
+<p>Modern UI with accessibility best practices.</p>
+</div>
+
+<div class="card">
+<h3>Project Four</h3>
+<p>Mobile-first responsive design.</p>
+</div>
+
+<div class="card">
+<h3>Project Five</h3>
+<p>Dark mode theme implementation.</p>
+</div>
+
+<div class="card">
+<h3>Project Six</h3>
+<p>API-driven application.</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 My Portfolio
+</footer>
+
+</div>
+
+<script>
+
+const toggle = document.getElementById("themeToggle")
+
+toggle.addEventListener("click", () => {
+
+const currentTheme = document.documentElement.getAttribute("data-theme")
+
+if(currentTheme === "dark"){
+document.documentElement.removeAttribute("data-theme")
+localStorage.setItem("theme","light")
+}
+else{
+document.documentElement.setAttribute("data-theme","dark")
+localStorage.setItem("theme","dark")
+}
+
+})
+
+if(localStorage.getItem("theme") === "dark"){
+document.documentElement.setAttribute("data-theme","dark")
+}
+
+</script>
+
+</body>
+</html>
