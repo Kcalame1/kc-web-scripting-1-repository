@@ -1,17 +1,15 @@
-# Kaidyn's Advanced CSS
+# Kaidyn's to do list
 
-This is my page using html and css
+This is my basic to do list
 
 ## Features
-- Nav Bar (Brand name, 4 links)
-- Hero
-- Projects
-- Dark mode
-- animations
+- input
+- add button
+- filter by tag
+- filter by complete/not complete
+- check off/ delete tasks
 
 
+<img width="591" height="350" alt="Screenshot 2026-03-19 at 11 30 48 AM" src="https://github.com/user-attachments/assets/2041a5bc-4610-4e68-9907-4b4f5365295d" />
 
-<img width="1020" height="639" alt="Screenshot 2026-03-11 at 1 48 37 PM" src="https://github.com/user-attachments/assets/a50f1080-2ee4-4748-b45b-68912046d27f" />
-
-<img width="1004" height="655" alt="Screenshot 2026-03-11 at 1 56 41 PM" src="https://github.com/user-attachments/assets/7f7e6539-49b4-41b1-885e-b2cae52ec797" />
 
