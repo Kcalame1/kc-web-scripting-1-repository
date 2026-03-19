@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do App</title>
+  <style>
+    body { font-family: Arial; max-width: 500px; margin: auto; }
+    .done { text-decoration: line-through; color: gray; }
+    .error { color: red; }
+    button { margin-left: 5px; }
+  </style>
+</head>
+<body>
+
+<h2>To-Do List</h2>
+
+<input id="taskInput" placeholder="Task name">
+<select id="tagInput">
+  <option value="">No tag</option>
+  <option value="school">School</option>
+  <option value="work">Work</option>
+  <option value="personal">Personal</option>
+</select>
+<button onclick="addTask()">Add</button>
+
+<p class="error" id="error"></p>
+
+<hr>
+
+<select id="filterStatus" onchange="renderTasks()">
+  <option value="all">All</option>
+  <option value="active">Active</option>
+  <option value="completed">Completed</option>
+</select>
+
+<select id="filterTag" onchange="renderTasks()">
+  <option value="all">All Tags</option>
+  <option value="school">School</option>
+  <option value="work">Work</option>
+  <option value="personal">Personal</option>
+</select>
+
+<p id="counter"></p>
+
+<ul id="taskList"></ul>
+
+<script>
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function addTask() {
+  const text = document.getElementById("taskInput").value.trim();
+  const tag = document.getElementById("tagInput").value;
+  const error = document.getElementById("error");
+
+  if (!text) {
+    error.textContent = "Task name cannot be blank";
+    return;
+  }
+
+  error.textContent = "";
+
+  const newTask = {
+    id: Date.now(),
+    text,
+    tag,
+    done: false
+  };
+
+  tasks.push(newTask);
+  saveTasks();
+
+  document.getElementById("taskInput").value = "";
+  document.getElementById("tagInput").value = "";
+
+  renderTasks();
+}
+
+function toggleTask(id) {
+  tasks = tasks.map(t => t.id === id ? {...t, done: !t.done} : t);
+  saveTasks();
+  renderTasks();
+}
+
+function deleteTask(id) {
+  tasks = tasks.filter(t => t.id !== id);
+  saveTasks();
+  renderTasks();
+}
+
+function renderTasks() {
+  const list = document.getElementById("taskList");
+  const status = document.getElementById("filterStatus").value;
+  const tag = document.getElementById("filterTag").value;
+
+  list.innerHTML = "";
+
+  let filtered = tasks.filter(t => {
+    if (status === "active" && t.done) return false;
+    if (status === "completed" && !t.done) return false;
+    if (tag !== "all" && t.tag !== tag) return false;
+    return true;
+  });
+
+  filtered.forEach(t => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <span class="${t.done ? "done" : ""}">
+        ${t.text} ${t.tag ? "(" + t.tag + ")" : ""}
+      </span>
+      <button onclick="toggleTask(${t.id})">✔</button>
+      <button onclick="deleteTask(${t.id})">✖</button>
+    `;
+
+    list.appendChild(li);
+  });
+
+  const activeCount = tasks.filter(t => !t.done).length;
+  document.getElementById("counter").textContent = `${activeCount} active tasks`;
+}
+
+renderTasks();
+</script>
+
+</body>
+</html>
