@@ -1,52 +1,130 @@
-const searchInput = document.getElementById('searchInput');
-const searchButton = document.getElementById('searchButton');
-const status = document.getElementById('status');
-const results = document.getElementById('results');
+const WORDS = ["APPLE", "GRAPE", "TRAIN", "HOUSE", "PLANT"];
 
-searchButton.addEventListener('click', runSearch);
+let game;
 
-async function runSearch() {
-  const term = searchInput.value.trim();
+function initGame() {
+  game = {
+    targetWord: WORDS[Math.floor(Math.random() * WORDS.length)],
+    currentRow: 0,
+    currentCol: 0,
+    guesses: Array(6).fill("").map(() => []),
+    feedback: Array(6).fill(null),
+    state: "playing"
+  };
+}
 
+function createBoard() {
+  const board = document.getElementById("board");
+  board.innerHTML = "";
 
-  if (!term) {
-    status.textContent = 'Please enter a search term.';
-    results.innerHTML = '';
-    return;
-  }
+  for (let r = 0; r < 6; r++) {
+    const row = document.createElement("div");
+    row.classList.add("row");
 
-  status.textContent = 'Loading...';
-  results.innerHTML = '';
-
-  try {
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(term)}`;
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
+    for (let c = 0; c < 5; c++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.id = `cell-${r}-${c}`;
+      row.appendChild(cell);
     }
 
-    const data = await response.json();
-
-    if (!data.meals) {
-      status.textContent = "No results found.";
-      return;
-    }
-
-    status.textContent = `Found ${data.meals.length} result(s).`;
-
-    results.innerHTML = data.meals.map(meal => `
-      <div class="card">
-        <h3>${meal.strMeal}</h3>
-        <p><strong>Category:</strong> ${meal.strCategory}</p>
-        <p><strong>Area:</strong> ${meal.strArea}</p>
-        <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
-      </div>
-    `).join("");
-
-  } catch (error) {
-    status.textContent = "Something went wrong. Please try again.";
-    console.error(error);
+    board.appendChild(row);
   }
 }
+
+function renderGame() {
+  for (let r = 0; r < 6; r++) {
+    for (let c = 0; c < 5; c++) {
+      const cell = document.getElementById(`cell-${r}-${c}`);
+      const letter = game.guesses[r][c] || "";
+      cell.textContent = letter;
+
+      cell.classList.remove("correct", "present", "absent");
+
+      if (game.feedback[r]) {
+        cell.classList.add(game.feedback[r][c]);
+      }
+    }
+  }
+
+  const status = document.getElementById("status");
+
+  if (game.state === "win") {
+    status.textContent = "You win! 🎉";
+  } else if (game.state === "lose") {
+    status.textContent = `You lose! Word was ${game.targetWord}`;
+  } else {
+    status.textContent = "Keep guessing...";
+  }
+}
+
+function processInput(key) {
+  if (game.state !== "playing") return;
+
+  if (/^[A-Z]$/.test(key)) {
+    if (game.currentCol < 5) {
+      game.guesses[game.currentRow][game.currentCol] = key;
+      game.currentCol++;
+    }
+  }
+
+  else if (key === "BACKSPACE") {
+    if (game.currentCol > 0) {
+      game.currentCol--;
+      game.guesses[game.currentRow][game.currentCol] = "";
+    }
+  }
+
+  else if (key === "ENTER") {
+    if (game.currentCol === 5) {
+      submitGuess();
+    }
+  }
+}
+
+function submitGuess() {
+  const guess = game.guesses[game.currentRow].join("");
+  const target = game.targetWord;
+
+  const result = [];
+
+  for (let i = 0; i < 5; i++) {
+    if (guess[i] === target[i]) {
+      result.push("correct");
+    } else if (target.includes(guess[i])) {
+      result.push("present");
+    } else {
+      result.push("absent");
+    }
+  }
+
+  game.feedback[game.currentRow] = result;
+
+  if (guess === target) {
+    game.state = "win";
+  } else if (game.currentRow === 5) {
+    game.state = "lose";
+  } else {
+    game.currentRow++;
+    game.currentCol = 0;
+  }
+}
+
+function restartGame() {
+  initGame();
+  renderGame();
+}
+
+document.addEventListener("keydown", (e) => {
+  const key = e.key.toUpperCase();
+  processInput(key);
+  renderGame();
+});
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+  restartGame();
+});
+
+initGame();
+createBoard();
+renderGame();
