@@ -1,42 +1,92 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+h1 {
   text-align: center;
+  color: white;
 }
 
-#board {
-  display: grid;
-  grid-template-rows: repeat(6, 60px);
-  gap: 5px;
-  justify-content: center;
-  margin: 20px auto;
+.container {
+  background: white;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.row {
-  display: grid;
-  grid-template-columns: repeat(5, 60px);
-  gap: 5px;
+input, select, button {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
 }
 
-.cell {
-  border: 2px solid #ccc;
-  font-size: 24px;
-  font-weight: bold;
+input {
+  width: 60%;
+}
+
+select {
+  width: 30%;
+}
+
+button {
+  background-color: #667eea;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #5a67d8;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+li {
+  background: #f7f7f7;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 8px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  transition: 0.2s;
 }
 
-.correct {
-  background-color: green;
-  color: white;
+li:hover {
+  transform: scale(1.02);
+  background: #eef1ff;
 }
 
-.present {
-  background-color: goldenrod;
-  color: white;
+.completed {
+  text-decoration: line-through;
+  color: gray;
 }
 
-.absent {
-  background-color: gray;
-  color: white;
+.task-text {
+  flex: 1;
+}
+
+.task-buttons button {
+  margin-left: 5px;
+  padding: 6px 8px;
+  font-size: 12px;
+}
+
+#progress {
+  margin-top: 15px;
+  font-weight: bold;
+  text-align: center;
 }

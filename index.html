@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Word Guess Game</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>Task Manager</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <h1>Word Guess Game</h1>
-  <p>Guess the hidden 5-letter word in 6 tries.</p>
+<h1>Task Manager</h1>
 
-  <div id="board"></div>
+<input id="taskInput" placeholder="Enter a task">
+<select id="categoryInput">
+  <option value="Work">Work</option>
+  <option value="School">School</option>
+  <option value="Personal">Personal</option>
+</select>
+<button onclick="addTask()">Add Task</button>
 
-  <p id="status">Type a word to begin.</p>
+<h3>Filter:</h3>
+<select id="filter" onchange="renderTasks()">
+  <option value="All">All</option>
+  <option value="Work">Work</option>
+  <option value="School">School</option>
+  <option value="Personal">Personal</option>
+</select>
 
-  <button id="restartBtn">Restart Game</button>
+<h3 id="progress"></h3>
 
-  <script src="script.js"></script>
+<ul id="taskList"></ul>
+
+<script src="script.js"></script>
 </body>
 </html>
